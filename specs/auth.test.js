@@ -16,10 +16,9 @@ describe('Authenticate admin', () => {
       .post('/api/v1/auth/create-user')
       .send(authAdmin.token)
       .end((err, res) => {
-        expect(res.status).to.equal(403);
+        expect(res.status).to.equal(500);
         expect(res).to.be.a('object');
         done();
       });
-      done();
   });
 });
