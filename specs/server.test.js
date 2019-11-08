@@ -12,13 +12,15 @@ chai.use(chaiHttp);
 
 let app; 
 
-before(done => {
-  app = server.listen(3000, done);
+before((done) => {
+  app = server.listen(3000);
+  done();
 });
 
-after(done => {
-  app.close(done);
-});
+// after((done) => {
+//   app.close();
+//   done();
+// });
 
 describe('Create user', () => {
   it('should not sign user up if email exists', (done) => {
