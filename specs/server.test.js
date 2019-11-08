@@ -26,34 +26,17 @@
 
 import chai from 'chai';
 
-import jwt from 'jsonwebtoken';
-
 import chaiHttp from 'chai-http';
 
 import server from '../source/server';
 
 import createUser from '../controllers/userController';
 
-const should = chai.should();
-
 const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-const user = {
-  firstName: 'Claud',
-  lastName: 'Watari',
-  email: 'claudwatari95@gmail.com',
-  password: 'password',
-  gender: 'male',
-  jobRole: 'Software developer',
-  department: 'Engineering',
-  address: 'Nairobi',
-}
-
-
 describe('Create user', () => {
-
   it('should not sign user up if email exists', (done) => {
     chai.request(server)
       .post('/api/v1/auth/create-user')
@@ -92,7 +75,7 @@ describe('Create user', () => {
       department: '',
       address: '',
     })
-    .end((err, res, body) => {
+    .end((err, res) => {
       expect(res.status).to.equal(409);
       expect(res).to.be.a('object');
       done();
@@ -104,7 +87,7 @@ describe('Create user', () => {
     chai.request(server)
     .post('/api/v1/auth/create-user')
     .send(createUser.addUser)
-    .end((err, res, body) => {
+    .end((err, res) => {
       expect(res.status).to.equal(500);
       expect(res).to.be.a('object');
       done();
@@ -123,7 +106,6 @@ describe('Create user', () => {
     });
     done();
   });
-
 });
 
 //   
