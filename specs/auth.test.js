@@ -6,6 +6,16 @@ import server from '../source/server';
 
 import authAdmin from '../auth/auth';
 
+let app; 
+
+before(done => {
+  app = server.listen(5000, done);
+});
+
+after(done => {
+  app.close(done);
+});
+
 const expect = chai.expect;
 
 chai.use(chaiHttp);
