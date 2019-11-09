@@ -6,7 +6,7 @@ Teamwork is an internal social network for employees of an organization. The goa
 ## About teamwork app
 This app is written using <a href = 'https://nodejs.org'>nodejs</a>/express and is expected to be written in <a href = 'https://reactjs.org
 '>Reactjs</a> for fornt end component rendering. The database used is <a href = 'https://www.postgresql.org'>Postgresql</a>.
-The testing framework used is <a href = 'https://mochajs.org/MochaJs</a>
+The testing framework used is <a href = 'https://mochajs.org'>MochaJs</a>
 
 ## Getting started
 Clone the app by running 
