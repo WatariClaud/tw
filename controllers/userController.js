@@ -6,8 +6,6 @@ import jwt from 'jsonwebtoken';
 
 import dotenv from 'dotenv';
 
-import Users from '../db/userModel';
-
 import role from '../roles';
 
 import { pool } from '../config';
