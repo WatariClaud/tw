@@ -21,7 +21,9 @@ describe('Authenticate admin', () => {
     password VARCHAR(255), gender VARCHAR(11), jobRole VARCHAR(50),
     department VARCHAR(50), address VARCHAR(30)`;
 
-    pool.query(query, (err, res));
+    pool.query(query, (err, res) => {
+      if(err) throw err;
+    });
 
     done();
   });
@@ -29,7 +31,9 @@ describe('Authenticate admin', () => {
   after('clear table', (done) => {
     const query = `DROP TABLE users`;
 
-    pool.query(query, (err, res));
+    pool.query(query, (err, res) => {
+      if(err) throw err;
+    });
 
     done();
   })
