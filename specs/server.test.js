@@ -15,7 +15,7 @@ const expect = chai.expect;
 chai.use(chaiHttp);
 
 describe('Create user', () => {
-  before('add table', (done) => {
+   before('add table', (done) => {
     const query = `CREATE TABLE users (id SERIAL PRIMARY KEY,
     firstName VARCHAR(30), lastName VARCHAR(30), email VARCHAR(50),
     password VARCHAR(255), gender VARCHAR(11), jobRole VARCHAR(50),
