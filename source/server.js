@@ -14,8 +14,8 @@ app.use(
 
 app.use(router);
 
-app.listen(process.env.PORT || 5432, () => {
-	console.log('Listening on port 5432');
+app.listen(process.env.PORT || 4000, () => {
+	console.log('Listening on port 4000');
     app.emit("app running");
 });
 
