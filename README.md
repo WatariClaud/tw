@@ -15,6 +15,11 @@ Clone the app by running
 ```
 You can also include a .env file to include your environment variables.
 
+Install dependencies by running
+```
+$ npm install
+```
+
 Start the server by running 
 ```
 $ npm start
