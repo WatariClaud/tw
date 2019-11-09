@@ -11,6 +11,14 @@ notifications:
 services:
   - postgresql
 
+# before_script:
+#   - psql -c 'create database teamwork;' -U postgres  
+#   - psql -c 'create user user WITH PASSWORD 'password';' -U postgres
+#   - psql -c 'create table users (id serial primary key, firstName varchar(30), lastName varchar(30), email varchar(50), password varchar(255), gender varchar(11), jobRole varchar(50), department varchar(50), address varchar(30));' -U postgres
+
 before_script:
+  - npm install
   - psql -c 'create database teamwork;' -U postgres
-  - psql -c 'create table users (id serial primary key, firstName varchar(30), lastName varchar(30), email varchar(50), password varchar(255), gender varchar(11), jobRole varchar(50), department varchar(50), address varchar(30));' -U postgres
+
+script:
+- npm run test

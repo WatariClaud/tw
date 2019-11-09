@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "teamwork employee bonding",
   "main": "index.js",
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "start": "nodemon es6/index.js",
     "test": "mocha --exit es6/tests.js",
