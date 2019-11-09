@@ -6,6 +6,8 @@ import chaiHttp from 'chai-http';
 
 import config from '../config';
 
+import config from '../config';
+
 import server from '../source/server';
 
 import createUser from '../controllers/userController';
@@ -14,18 +16,9 @@ const expect = chai.expect;
 
 chai.use(chaiHttp);
 
-const Pool = pg.Pool;
-
-const pool = new Pool({
-  user: config.dbUser,
-  host: config.DbH,
-  database: config.dbName,
-  password: config.dbPass,
-  port: config.dbPort,
-});
+const { pool } = require('../config');
 
 describe('Create user', () => {
-
   before('add table', (done) => {
     const query = `CREATE TABLE users (id SERIAL PRIMARY KEY,
     firstName VARCHAR(30), lastName VARCHAR(30), email VARCHAR(50),

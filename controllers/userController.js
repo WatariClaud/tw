@@ -14,15 +14,7 @@ import config from '../config';
 
 dotenv.config();
 
-const Pool = pg.Pool;
-
-const pool = new Pool({
-  user: config.dbUser,
-  host: config.DbH,
-  database: config.dbName,
-  password: config.dbPass,
-  port: config.dbPort,
-});
+const { pool } = require('../config');
 
 const checkTable = (req, res, next) => {
   const query = `CREATE TABLE users (id SERIAL PRIMARY KEY,
