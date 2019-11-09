@@ -10,7 +10,7 @@ import Users from '../db/userModel';
 
 import role from '../roles';
 
-import config from './config';
+import config from '../config';
 
 dotenv.config();
 
