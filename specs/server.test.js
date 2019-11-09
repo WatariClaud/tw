@@ -4,6 +4,8 @@ import pg from 'pg';
 
 import chaiHttp from 'chai-http';
 
+import config from './config';
+
 import server from '../source/server';
 
 import createUser from '../controllers/userController';
