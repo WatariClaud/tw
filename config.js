@@ -20,6 +20,4 @@ const dbPass = process.env.dbPass;
 
 const dbPort = process.env.dbPort;
 
-const secret = process.env.secret;
-
 export default secret;
