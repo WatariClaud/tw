@@ -4,18 +4,24 @@ import bcrypt from 'bcrypt';
 
 import jwt from 'jsonwebtoken';
 
+import dotenv from 'dotenv';
+
 import Users from '../db/userModel';
 
 import role from '../roles';
 
+import config from './config';
+
+dotenv.config();
+
 const Pool = pg.Pool;
 
 const pool = new Pool({
-  user: 'me',
-  host: 'localhost',
-  database: 'teamwork',
-  password: 'password',
-  port: 5432,
+  user: config.dbUser,
+  host: config.DbH,
+  database: config.dbName,
+  password: config.dbPass,
+  port: config.dbPort,
 });
 
 const createUser = (req, res, next) => {
@@ -89,7 +95,7 @@ const createUser = (req, res, next) => {
           const token = jwt.sign({
             email: email,
             admin: false,
-          }, 'SECRET_KEY', {
+          }, config.secret, {
           	expiresIn: '1h',
           });
 
@@ -171,7 +177,7 @@ const logIn = (req, res) => {
         const token = jwt.sign({
         	email: validUser.email,
         	id: validUser.id,
-        }, SECRET_KEY, {
+        }, config.secret, {
           expiresIn: '1h'
         });
         return res.status(200).json({
