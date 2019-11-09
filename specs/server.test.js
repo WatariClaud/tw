@@ -26,7 +26,7 @@ describe('Create user', () => {
     });
 
     done();
-  });
+  }); 
 
   after('clear table', (done) => {
     const query = `DROP TABLE users`;
