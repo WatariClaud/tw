@@ -4,7 +4,7 @@ import pg from 'pg';
 
 import chaiHttp from 'chai-http';
 
-import config from '../config';
+import { pool } from '../config';
 
 import server from '../source/server';
 
@@ -13,8 +13,6 @@ import createUser from '../controllers/userController';
 const expect = chai.expect;
 
 chai.use(chaiHttp);
-
-const { pool } = require('../config');
 
 describe('Create user', () => {
   before('add table', (done) => {

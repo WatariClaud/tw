@@ -10,11 +10,9 @@ import Users from '../db/userModel';
 
 import role from '../roles';
 
-import config from '../config';
+import { pool } from '../config';
 
 dotenv.config();
-
-const { pool } = require('../config');
 
 const checkTable = (req, res, next) => {
   const query = `CREATE TABLE users (id SERIAL PRIMARY KEY,

@@ -6,13 +6,11 @@ import server from '../source/server';
 
 import authAdmin from '../auth/auth';
 
-import config from '../config';
+import { pool } from '../config';
 
 const expect = chai.expect;
 
 chai.use(chaiHttp);
-
-const { pool } = require('../config');
 
 describe('Authenticate admin', () => {
   before('add table', (done) => {
