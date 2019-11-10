@@ -11,7 +11,7 @@ The testing framework used is <a href = 'https://mochajs.org'>MochaJs</a>
 ## Getting started
 Clone the app by running 
 ```
-> git clone https://github.com/ClaudWatari95/tw.git
+git clone https://github.com/ClaudWatari95/tw.git
 ```
 You can also include a .env file to include your environment variables.
 
