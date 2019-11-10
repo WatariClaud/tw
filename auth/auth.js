@@ -1,17 +1,22 @@
+import dotenv from 'dotenv';
+
+import jwt from 'jsonwebtoken';
+
+dotenv.config();
+
 const authAdmin = (req, res, next) => {
   const token = req.header('x-auth-header');
   if (!token) {
     return res.status(403).json({
       'message': 'Access Denied: No Token Provided!',
     });
-  }
-  const checkAuth = ()  => {
+  } else {
     try {
-    const decoded = jwt.verify(token, 'SECRET_KEY');
+    const decoded = jwt.verify(token, config.secret);
     if(role[decoded.role].find((url) => {
       return url === req.baseUrl
     })) {
-      req.user = decoded
+      return req.user = decoded
     }
 
     if (req.user.admin === true) {
@@ -28,7 +33,7 @@ const authAdmin = (req, res, next) => {
       });
     }
   }
-  return token;
+  return res.end();
 };
 
 export default authAdmin;
