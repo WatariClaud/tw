@@ -49,5 +49,9 @@ Due to the owner's pc's inability to install postman's ms c++, HTTP commands hav
 #### sign up
 <img src = 'https://github.com/ClaudWatari95/tw/blob/develop/screenshots/curl-signup.png' alt = 'sign_up_screenshot'>
 
+#### table after adding a user
+
+<img src = 'https://github.com/ClaudWatari95/tw/blob/develop/screenshots/psql-users-table.png' alt = 'users_table_with_row'>
+
 #### log in
 <img src = 'https://github.com/ClaudWatari95/tw/blob/develop/screenshots/curl-login.png' alt = 'login_screenshot'>
