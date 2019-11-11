@@ -16,7 +16,7 @@ const checkTable = (req, res, next) => {
   const query = `CREATE TABLE users (id SERIAL PRIMARY KEY,
     firstName VARCHAR(30), lastName VARCHAR(30), email VARCHAR(50),
     password VARCHAR(255), gender VARCHAR(11), jobRole VARCHAR(50),
-    department VARCHAR(50), address VARCHAR(30)`;
+    department VARCHAR(50), address VARCHAR(30), admin VARCHAR(11))`;
 
   pool.query(query, (err, res) => {
     if(err) throw err;
@@ -95,7 +95,7 @@ const createUser = (req, res, next) => {
           const token = jwt.sign({
             email: email,
             admin: false,
-          }, config.secret, {
+          }, 'secret_KEY', {
           	expiresIn: '1h',
           });
 
@@ -109,7 +109,7 @@ const createUser = (req, res, next) => {
                          jobRole, 
                          department, 
                          address,
-                         isAdmin) 
+                         admin) 
                          VALUES 
                          ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
                          RETURNING *`;
@@ -149,47 +149,52 @@ const createUser = (req, res, next) => {
 	});
 };
 
-const logIn = (req, res) => {
+const logIn = (req, res, next) => {
   if(!req.body.email) {
     return res.status(400).json({
       success: 'false',
       message: 'email name is required'
     });
-  } else if(!req.body.email) {
+  } else if(!req.body.password) {
     return res.status(400).json({
       success: 'false',
       message: 'password is required'
     });
   } 
   const userEmail = req.body.email;
-  const validUser = pool.query('SELECT * FROM users WHERE email = ?', [userEmail]);
-  if(!validUser) {
-    return res.status(401).json({
-    	'message': 'auth failed'
-    })  ;
-  } else {
-    bcrypt.compare(req.body.password, validUser.password, (err, reult) => {
+  const userPass = req.body.password;
+  const validUser = pool.query('SELECT * FROM users WHERE email = $1', [userEmail], (error, reslt) => {
+    if(error) throw error;
+    if(reslt.rows.length < 1) {
+      return res.status(401).json({
+      'message': 'auth failed! invalid credentials'
+    });
+    } else {
+    bcrypt.compare(userPass, reslt.rows[0].password, (err, result) => {
       if(err) {
-      	return res.status(401).json({
-      		'message': 'auth failed'
-      	});
-      } else if(result) {
+        return res.status(401).json({
+          'message': 'auth failed! validation error'
+        });
+      } 
+      // else if(result) {
         const token = jwt.sign({
-        	email: validUser.email,
-        	id: validUser.id,
-        }, config.secret, {
+          email: reslt.rows[0].email,
+          id: reslt.rows[0].id,
+        }, 'secret_KEY', {
           expiresIn: '1h'
         });
         return res.status(200).json({
-        	'status': 'success',
-        	'data': {
-        	  'token': token,
-        	  'userId': validUser.id,
-        	}
+          'status': 'success',
+          'data': {
+            'token': token,
+            'userId': reslt.rows[0].id,
+          }
         })
-      }
+        next();
+      // }
     });
   }
+  });
 };
 
 export default {
