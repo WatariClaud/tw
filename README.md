@@ -7,6 +7,7 @@ Teamwork is an internal social network for employees of an organization. The goa
 This app is written using <a href = 'https://nodejs.org'>nodejs</a>/express and is expected to be written in <a href = 'https://reactjs.org
 '>Reactjs</a> for front end component rendering. The database used is <a href = 'https://www.postgresql.org'>Postgresql</a>.
 The testing framework used is <a href = 'https://mochajs.org'>MochaJs</a>
+The linting framework used is <a href = 'https://eslint.org'>eslint</a> with <a href = 'https://github.com/airbnb/javascript'>airbnb</a> style guide.
 
 ## Getting started
 Clone the app by running 
@@ -27,6 +28,10 @@ $ npm start
 To run mocha tests, run 
 ```
 $ npm test
+```
+To run linting, run 
+```
+$ npm run lint
 ```
 
 ## API Endpoints
