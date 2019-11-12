@@ -55,7 +55,7 @@ const editArticle = (req, res) => {
   //   })
   // }
 
-  pool.query(`SELECT * FROM articles where articleid = ${_id}`, (error, success) => {
+  pool.query(`SELECT * FROM articles WHERE articleid = ${_id}`, (error, success) => {
     if(error) throw error;
     if(success.rows.length < 1) {
       res.status(403).json({
@@ -70,7 +70,7 @@ const editArticle = (req, res) => {
           });
       });
     } else {
-      pool.query('UPDATE articles SET title = ($1) WHERE articleid = ($2)', [title, _id], (e, ok) => {
+      pool.query('UPDATE articles SET title = ($1) WHERE articleid = ($2) RETURNING *', [title, _id], (e, ok) => {
         if(e) throw e;
           res.status(201).json({
             'message': 'article title updated successfully',
@@ -80,8 +80,32 @@ const editArticle = (req, res) => {
   })
 };
 
+const deleteArticle = (req, res) => {
+  const _id = req.params.articleid;
+
+  pool.query(`SELECT * FROM articles WHERE articleid = ${_id}`, (error, result) => {
+    if(error) throw error;
+    if(result.rows.length < 1) {
+      res.status(403).json({
+        'error': 'unable to find article',
+      });
+    } else {
+      pool.query(`DELETE FROM articles WHERE articleid = ${_id}`, (e, r) => {
+        if(e) throw e;
+        res.status(201).json({
+          'success': true,
+          'data': {
+            'message': 'successfully deleted article',
+          }
+        })
+      })
+    }
+  })
+}
+
 export default {
   checkTable,
 	createArticle,
   editArticle,
+  deleteArticle,
 }
