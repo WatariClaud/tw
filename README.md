@@ -36,6 +36,8 @@ $ npm test
 | /api/v1/auth/create-user                   | POST    | Create an account           |
 | -------------------------------- | ------- | --------------------------- |
 | /api/v1/auth/signin                   | POST    | Log In to account           |
+| -------------------------------- | ------- | --------------------------- |
+| /api/v1/gifs                   | POST    | Post Gifs          |
 
 
 ### Screenshots
@@ -55,3 +57,10 @@ Due to the owner's pc's inability to install postman's ms c++, HTTP commands hav
 
 #### log in
 <img src = 'https://github.com/ClaudWatari95/tw/blob/develop/screenshots/curl-login.png' alt = 'login_screenshot'>
+
+#### post gifs
+
+Gif images are hosted on <a href = 'cloudinary.com'>cloudinary</a>
+After running curl post command and inserting the Gif url to the gif table for the teamwork database, the gif image is seen below uploaded to cloudinary.
+
+<img src = 'https://github.com/ClaudWatari95/tw/blob/develop/screenshots/headbanging.gif' alt = 'cloudinary_gif_thumbnail'>
