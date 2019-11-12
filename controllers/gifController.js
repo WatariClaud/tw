@@ -14,7 +14,7 @@ const cloudinary = cloudinaryModule.v2;
 
 const checkTable = (req, res, next) => {
   const query = `CREATE TABLE gifs (gifId SERIAL PRIMARY KEY,
-    title VARCHAR(30), imageUrl VARCHAR(255), createdOn DATE DEFAULT CURRENT_DATE)`;
+    title VARCHAR(30), imageurl VARCHAR(255), createdOn DATE DEFAULT CURRENT_DATE)`;
 
   pool.query(query, (err, res) => {
     if(err) throw err;
@@ -51,10 +51,12 @@ const addGif = (req, res, next) => {
 
   const gifDate = new Date().getTime();
 
-  pool.query('INSERT INTO GIFS (title, imageUrl) VALUES ($1, $2)', [title, image], (error, result) => {
+  pool.query('INSERT INTO GIFS (title, imageurl) VALUES ($1, $2)', [title, image], (error, result) => {
     if(error) throw error;
 
     cloudinary.uploader.upload(image, {
+      use_filename: true, 
+      unique_filename: false,
       'crop': 'limit',
       'tags': 'teamwork',
       'width': 3000,
@@ -81,9 +83,17 @@ const addGif = (req, res, next) => {
 };
 
 const deleteGif = (req, res) => {
+  let onlyImage;
   const _id = req.params.gifId;
-
    pool.query(`SELECT * FROM gifs WHERE gifId = ${_id}`, (error, result) => {
+    console.log(result.rows)
+    if(result.rows[0].imageurl.split('/').length > 1) {
+      onlyImage = result.rows[0].imageurl.split('/')[1];
+    } else { 
+      onlyImage = result.rows[0].imageurl
+    }
+    onlyImage = onlyImage.split('.')[0];
+    const cloudinaryUrl = 'https://res.cloudinary.com/dzdqe8iow/image/upload/v1573596782/'+onlyImage+'';
     if(error) throw error;
     if(result.rows.length < 1) {
       res.status(403).json({
@@ -97,6 +107,11 @@ const deleteGif = (req, res) => {
           'data': {
             'message': 'successfully deleted gif',
           }
+        })
+        console.log(cloudinaryUrl)
+        cloudinary.uploader.destroy(onlyImage, (errorDeleteing, result) => {
+          if(errorDeleteing) console.log(errorDeleteing);
+          console.log(result);
         })
       })
     }
