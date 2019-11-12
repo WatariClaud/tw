@@ -1,5 +1,3 @@
-import pg from 'pg';
-
 import dotenv from 'dotenv';
 
 import cloudinaryModule from 'cloudinary';
@@ -22,7 +20,7 @@ const checkTable = (req, res, next) => {
     if(err) throw err;
     else next();
   });
-}
+};
 
 const cloudinaryUser = cloudinary.config({cloud_name: "dzdqe8iow", 
   api_key: "463172811329134", 
