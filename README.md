@@ -43,6 +43,7 @@ $ npm run lint
 | /api/v1/gifs                   | POST    | Post Gifs          |
 | /api/v1/articles                   | POST    | Post Articles          |
 | /api/v1/articles/:articleId                   | PATCH    | Edit Articles          |
+| /api/v1/articles/:articleId                   | DELETE    | Delete Articles          |
 
 
 ### Screenshots
