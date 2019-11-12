@@ -40,6 +40,8 @@ $ npm test
 | /api/v1/gifs                   | POST    | Post Gifs          |
 | -------------------------------- | ------- | --------------------------- |
 | /api/v1/articles                   | POST    | Post Articles          |
+| -------------------------------- | ------- | --------------------------- |
+| /api/v1/articles                   | PATCH    | Edit Articles          |
 
 
 ### Screenshots
