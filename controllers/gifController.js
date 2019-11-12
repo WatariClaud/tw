@@ -80,8 +80,31 @@ const addGif = (req, res, next) => {
   });
 };
 
+const deleteGif = (req, res) => {
+  const _id = req.params.gifId;
+
+   pool.query(`SELECT * FROM gifs WHERE gifId = ${_id}`, (error, result) => {
+    if(error) throw error;
+    if(result.rows.length < 1) {
+      res.status(403).json({
+        'error': 'unable to find article',
+      });
+    } else {
+      pool.query(`DELETE FROM gifs WHERE gifId = ${_id}`, (e, r) => {
+        if(e) throw e;
+        res.status(201).json({
+          'success': true,
+          'data': {
+            'message': 'successfully deleted gif',
+          }
+        })
+      })
+    }
+  });
+}
+
 export default {
-  checkTable, addGif
+  checkTable, addGif, deleteGif
 }
 
 
