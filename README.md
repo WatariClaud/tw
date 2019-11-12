@@ -51,7 +51,7 @@ Postgresql database and tables have been created through the command line as see
 
 <img src = 'https://github.com/ClaudWatari95/tw/blob/develop/screenshots/psql-create-table.png' alt = 'create_psql_table'>
 
-Due to the owner's pc's inability to install postman's ms c++, HTTP commands have been tested via <a href = 'https://curl.haxx.se'>curl</a> on the command line.
+Due to the owner's pc's inability to install postman's <a href = 'https://www.microsoft.com/en-us/download/details.aspx?id=30653'>ms .net framework 4.5</a>, HTTP commands have been tested via <a href = 'https://curl.haxx.se'>curl</a> on the command line.
 
 #### sign up
 <img src = 'https://github.com/ClaudWatari95/tw/blob/develop/screenshots/curl-signup.png' alt = 'sign_up_screenshot'>
