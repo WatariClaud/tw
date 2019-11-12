@@ -18,5 +18,6 @@ router.post('/api/v1/auth/signin', userController.logIn);
 router.post('/api/v1/gifs', checkToken, gifController.addGif);
 router.post('/api/v1/articles', checkToken, articleController.createArticle);
 router.patch('/api/v1/articles/:articleid', checkToken, articleController.editArticle);
+router.delete('/api/v1/articles/:articleid', checkToken, articleController.deleteArticle);
 
 export default router;
