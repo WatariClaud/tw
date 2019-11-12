@@ -60,7 +60,7 @@ Due to the owner's pc's inability to install postman's ms c++, HTTP commands hav
 
 #### post gifs
 
-Gif images are hosted on <a href = 'cloudinary.com'>cloudinary</a>
+Gif images are hosted on <a href = 'https://cloudinary.com'>cloudinary</a>
 After running curl post command and inserting the Gif url to the gif table for the teamwork database, the gif image is seen below uploaded to cloudinary.
 
 <img src = 'https://github.com/ClaudWatari95/tw/blob/develop/screenshots/cloudinaryGif.png' alt = 'cloudinary_gif_thumbnail'>
