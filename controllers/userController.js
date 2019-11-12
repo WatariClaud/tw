@@ -95,7 +95,7 @@ const createUser = (req, res, next) => {
           const token = jwt.sign({
             email: email,
             admin: false,
-          }, 'secret_KEY', {
+          }, process.env.secret_token, {
           	expiresIn: '1h',
           });
 
@@ -180,7 +180,7 @@ const logIn = (req, res, next) => {
         const token = jwt.sign({
           email: reslt.rows[0].email,
           id: reslt.rows[0].id,
-        }, 'secret_KEY', {
+        }, process.env.secret_token, {
           expiresIn: '1h'
         });
         return res.status(200).json({
