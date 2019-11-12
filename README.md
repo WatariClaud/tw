@@ -44,6 +44,7 @@ $ npm run lint
 | /api/v1/articles                   | POST    | Post Articles          |
 | /api/v1/articles/:articleId                   | PATCH    | Edit Articles          |
 | /api/v1/articles/:articleId                   | DELETE    | Delete Articles          |
+| /api/v1/gifs/:gifId                   | DELETE    | Delete Gifs          |
 
 
 ### Screenshots
