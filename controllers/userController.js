@@ -14,7 +14,7 @@ dotenv.config();
 
 const checkTable = (req, res, next) => {
   const query = `CREATE TABLE users (id SERIAL PRIMARY KEY,
-    firstName VARCHAR(30), lastName VARCHAR(30), email VARCHAR(50),
+    firstName VARCHAR(30), lastName VARCHAR(30), email VARCHAR(50) UNIQUE,
     password VARCHAR(255), gender VARCHAR(11), jobRole VARCHAR(50),
     department VARCHAR(50), address VARCHAR(30), admin VARCHAR(11))`;
 
@@ -198,5 +198,5 @@ const logIn = (req, res, next) => {
 };
 
 export default {
-	createUser, logIn
+	checkTable, createUser, logIn
 };
