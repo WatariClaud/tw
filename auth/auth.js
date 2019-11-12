@@ -12,7 +12,7 @@ const authAdmin = (req, res, next) => {
     });
   } else {
     try {
-    const decoded = jwt.verify(token, config.secret);
+    const decoded = jwt.verify(token, process.env.secret_key);
     if(role[decoded.role].find((url) => {
       return url === req.baseUrl
     })) {
