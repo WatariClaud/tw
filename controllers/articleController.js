@@ -101,11 +101,31 @@ const deleteArticle = (req, res) => {
       })
     }
   })
-}
+};
+
+const viewSpecificArticle = (req, res) => {
+  const _id = req.params.articleid;
+  pool.query('SELECT * FROM articles WHERE articleid = ($1)', [_id], (err, result) => {
+    if(err) throw err;
+    if(result.rows.length < 1) {
+      return res.status(404).json({
+        'error': 'not found',
+      })
+    }
+    res.status(200).json({
+      'success': true,
+      'data': {
+        'message': 'article retrieved successfully',
+        'article': result.rows,
+      }
+    });
+  });
+};
 
 export default {
   checkTable,
 	createArticle,
   editArticle,
   deleteArticle,
+  viewSpecificArticle,
 }
