@@ -10,6 +10,8 @@ import gifController from '../controllers/gifController';
 
 import articleController from '../controllers/articleController';
 
+import commentController from '../controllers/commentController';
+
 const router = express.Router();
 // const app = express();
 
@@ -20,5 +22,7 @@ router.post('/api/v1/articles', checkToken, articleController.createArticle);
 router.patch('/api/v1/articles/:articleid', checkToken, articleController.editArticle);
 router.delete('/api/v1/articles/:articleid', checkToken, articleController.deleteArticle);
 router.delete('/api/v1/gifs/:gifId', checkToken, gifController.deleteGif);
+router.post('/api/v1/gifs/:gifId/comments', checkToken, commentController.addGifComment);
+router.post('/api/v1/articles/:articleid/comments', checkToken, commentController.addArticleComment);
 
 export default router;
