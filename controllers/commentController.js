@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 
-import jwt from 'jsonwebtokens';
+import jwt from 'jsonwebtoken';
 
 import { pool } from '../config';
 
@@ -29,7 +29,7 @@ const checkTableArticles = (req, res, next) => {
 let loggedUser;
 
 const checkUser = (req, res, next) => {
-  const token = req.headers.['x-access-token'] || req.headers['authorization'];
+  const token = req.headers['x-access-token'] || req.headers['authorization'];
   const decoded = jwt.decode(token, {complete: true});
   const user = decoded.payload;
   loggedUser = user.email;

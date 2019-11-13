@@ -12,6 +12,8 @@ import articleController from '../controllers/articleController';
 
 import commentController from '../controllers/commentController';
 
+import feedController from '../controllers/feedController';
+
 const router = express.Router();
 // const app = express();
 
@@ -24,5 +26,6 @@ router.delete('/api/v1/articles/:articleid', checkToken, articleController.delet
 router.delete('/api/v1/gifs/:gifId', checkToken, gifController.deleteGif);
 router.post('/api/v1/gifs/:gifId/comments', checkToken, commentController.addGifComment);
 router.post('/api/v1/articles/:articleid/comments', checkToken, commentController.addArticleComment);
+router.get('/api/v1/feed', checkToken, feedController.showFeed);
 
 export default router;
