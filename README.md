@@ -48,6 +48,7 @@ $ npm run lint
 | /api/v1/gifs/:gifId/comments                   | POST    | Post gif comments         |
 | /api/v1/articles/:articleId/comments                   | POST    | Post articles comments          |
 | /api/v1/feed                   | GET    | view gifs and articles          |
+| /api/v1/gifs/:gifId                   | GET    | view specific gif          |
 
 
 ### Screenshots
