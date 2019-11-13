@@ -27,6 +27,7 @@ router.delete('/api/v1/gifs/:gifId', checkToken, gifController.deleteGif);
 router.post('/api/v1/gifs/:gifId/comments', checkToken, commentController.addGifComment);
 router.post('/api/v1/articles/:articleid/comments', checkToken, commentController.addArticleComment);
 router.get('/api/v1/feed', checkToken, feedController.showFeed);
-router.get('/api/v1/gifs/:gifId', gifController.viewSpecificGif);
+router.get('/api/v1/gifs/:gifId', checkToken, gifController.viewSpecificGif);
+router.get('/api/v1/articles/:articleid', checkToken, articleController.viewSpecificArticle);
 
 export default router;

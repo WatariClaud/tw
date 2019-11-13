@@ -120,6 +120,11 @@ const viewSpecificGif = (req, res) => {
   const _id = req.params.gifId;
   pool.query('SELECT * FROM gifs WHERE gifId = ($1)', [_id], (err, result) => {
     if(err) throw err;
+    if(result.rows.length < 1) {
+      return res.status(404).json({
+        'error': 'not found',
+      })
+    }
     res.status(201).json({
       'success': true,
       'data': {
