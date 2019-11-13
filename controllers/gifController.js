@@ -93,7 +93,6 @@ const deleteGif = (req, res) => {
       onlyImage = result.rows[0].imageurl
     }
     onlyImage = onlyImage.split('.')[0];
-    const cloudinaryUrl = 'https://res.cloudinary.com/dzdqe8iow/image/upload/v1573596782/'+onlyImage+'';
     if(error) throw error;
     if(result.rows.length < 1) {
       res.status(403).json({
@@ -108,7 +107,6 @@ const deleteGif = (req, res) => {
             'message': 'successfully deleted gif',
           }
         })
-        console.log(cloudinaryUrl)
         cloudinary.uploader.destroy(onlyImage, (errorDeleteing, result) => {
           if(errorDeleteing) console.log(errorDeleteing);
           console.log(result);
@@ -116,10 +114,24 @@ const deleteGif = (req, res) => {
       })
     }
   });
+};
+
+const viewSpecificGif = (req, res) => {
+  const _id = req.params.gifId;
+  pool.query('SELECT * FROM gifs WHERE gifId = ($1)', [_id], (err, result) => {
+    if(err) throw err;
+    res.status(201).json({
+      'success': true,
+      'data': {
+        'message': 'gif retrieved successfully',
+        'gif': result.rows[0],
+      }
+    });
+  });
 }
 
 export default {
-  checkTable, addGif, deleteGif
+  checkTable, addGif, deleteGif, viewSpecificGif
 }
 
 
