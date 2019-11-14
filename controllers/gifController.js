@@ -27,7 +27,7 @@ const cloudinaryUser = cloudinary.config({cloud_name: "dzdqe8iow",
   api_secret: process.env.Cloudinary_Secret                       
 });
 
-const addGif = (req, res, next) => {
+const addGif = (req, res) => {
   const { 
   	      title, 
   	      image
@@ -39,8 +39,6 @@ const addGif = (req, res, next) => {
     })
   }
 
-  // const filename = req.files.dataFile.path;
-
   const buffer = readChunk.sync(image, 0, fileType.minimumBytes);
 
   if(fileType(buffer).ext !== 'gif') {
@@ -48,8 +46,6 @@ const addGif = (req, res, next) => {
       'message': 'Only gif files supported',
     })
   }
-
-  const gifDate = new Date().getTime();
 
   pool.query('INSERT INTO GIFS (title, imageurl) VALUES ($1, $2)', [title, image], (error, result) => {
     if(error) throw error;
@@ -75,7 +71,7 @@ const addGif = (req, res, next) => {
       'success': true,
       'data': {
         'message': 'gif added successfully',
-        'createdOn': gifDate,
+        'createdOn': new Date().getTime(),
         'title': image,
       }
     });

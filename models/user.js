@@ -1,26 +1,55 @@
-const users = {
-  thisUser: {
-    firstName: 'Claud',
-	lastName: 'Watari',
-    email: 'claudwatari95@gmail.com', 
-    password: 'password', 
-    gender: 'male', 
-    jobRole: 'Software developer', 
-    department: 'Engineering', 
-    address: 'Nairobi',
-    admin: true,
+import bcrypt from 'bcrypt';
+
+let hashed;
+
+bcrypt.hash('password', 10, (err, hash) => {
+  hashed = hash;
+})
+
+const userModel = {
+  user1: {
+    firstName: '',
+    lastName: '',
+    email: '', 
+    password: '', 
+    gender: '', 
+    jobRole: '', 
+    department: '', 
+    address: '',
   },
-  otherUser: {
+  user2: {
     firstName: 'Claud',
-	lastName: 'Watari',
-    email: 'claud@gmail.com', 
+    lastName: 'Watari',
+    email: 'claud@example.com', 
     password: 'password', 
     gender: 'male', 
-    jobRole: 'Software developer', 
+    jobRole: 'Developer', 
     department: 'Engineering', 
     address: 'Nairobi',
     admin: false,
   },
+  user3: {
+    firstName: 'Claud',
+    lastName: 'Watari',
+    email: 'claudwatari@gmail.com', 
+    password: hashed, 
+    gender: 'male', 
+    jobRole: 'Developer', 
+    department: 'Engineering', 
+    address: 'Nairobi',
+    admin: true,
+  },
+  user4: {
+    firstName: 'Claud',
+    lastName: 'Watari',
+    email: 'claudk@gmail.com', 
+    password: hashed, 
+    gender: 'male', 
+    jobRole: 'Developer', 
+    department: 'Engineering', 
+    address: 'Nairobi',
+    admin: false,
+  }
 };
 
-export default users;
+export default userModel;

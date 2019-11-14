@@ -40,13 +40,13 @@ const createUser = (req, res, next) => {
 	  if(e) throw e;
 	  else {
 	  	if(r.rows.length > 0) {
-	  		return res.status(409).json({
+	  		return res.status(500).json({
 	  		  'message': 'unable to sign up',
 	  		});
 	  	} else {
           bcrypt.hash(req.body.password, 10, (err, hash) => {
           if(err) {
-            return res.status(500).json({
+            return res.status(503).json({
               error: err
             });
           } else {
@@ -132,13 +132,11 @@ const createUser = (req, res, next) => {
           	    error: error
               });
             }
-            const success = res.status(201).json({
-              // 'message': `User added with ID: ${result.insertId}`,
+            return res.status(201).json({
               'status': 'success',
               'data': {
                 'message': 'user account successfully created',
                 'token': token,
-                // 'userId': result.rows[0].Id,
               }
              });
           });
