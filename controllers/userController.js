@@ -149,12 +149,12 @@ const createUser = (req, res, next) => {
 
 const logIn = (req, res, next) => {
   if(!req.body.email) {
-    return res.status(400).json({
+    return res.status(409).json({
       success: 'false',
       message: 'email name is required'
     });
   } else if(!req.body.password) {
-    return res.status(400).json({
+    return res.status(409).json({
       success: 'false',
       message: 'password is required'
     });
@@ -174,7 +174,7 @@ const logIn = (req, res, next) => {
           'message': 'auth failed! validation error'
         });
       } 
-      // else if(result) {
+      // else if(result) 
         const token = jwt.sign({
           email: reslt.rows[0].email,
           id: reslt.rows[0].id,
