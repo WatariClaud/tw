@@ -28,19 +28,13 @@ const createArticle = (req, res) => {
       	error: error
       });
     }
-
-    const lastObj = pool.query('SELECT * FROM articles ORDER BY articleid DESC LIMIT 1', (caught, ok) => {
-      if(caught) throw caught;
-      res.status(201).json({
-        'status': 'success',
-        'data': {
-          'message': 'Article successfully posted',
-          'articleid': ok.rows[0].articleid + 1,
-          'title': title,
-        }
-      });
+    res.status(201).json({
+      'status': 'success',
+      'data': {
+        'message': 'Article successfully posted',
+        'title': title,
+      }
     });
-    
   });
 };
 
