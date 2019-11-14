@@ -17,7 +17,7 @@ const gifModel = {
 		article: 'my article',
   },
 }
-describe('add gif', () => {
+describe('add article', () => {
   it('should check article and title are available', (done) => {
     chai.request(server)
     .post('/api/v1/articles')
