@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
 
+import jwt from 'jsonwebtoken';
+
 let hashed;
 
 bcrypt.hash('password', 10, (err, hash) => {
@@ -7,6 +9,17 @@ bcrypt.hash('password', 10, (err, hash) => {
 })
 
 const userModel = {
+  nonAdmin: {
+    firstName: 'user',
+    lastName: 'sample',
+    email: 'example@mail.com', 
+    password: '12345678', 
+    gender: 'male', 
+    jobRole: 'model user', 
+    department: 'tw', 
+    address: 'no address',
+    admin: false,
+  },
   user1: {
     firstName: '',
     lastName: '',
