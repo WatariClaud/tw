@@ -3,11 +3,7 @@ import jwt from 'jsonwebtoken';
 import config from '../config';
 
 const checkToken = (req, res, next) => {
-  const Token = req.headers['x-access-token'] || req.headers['authorization'];
-  // if (Token.startsWith('Bearer ')) {
-  //   const token = Token.slice(7, token.length);
-  // }
-  const token = Token.split(' ')[1];
+  const token = req.header('authorization');
 
   if (token) {
     jwt.verify(token, process.env.secret_token, (err, decoded) => {

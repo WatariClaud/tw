@@ -6,10 +6,28 @@ import server from '../source/server';
 
 import userModel from '../models/user';
 
+import authAdmin from '../auth/auth';
+
 const expect = chai.expect;
 chai.use(chaiHttp);
 
+let admin;
+
 describe('create user', () => {
+  before('tests', (done) => {
+    authAdmin.admin === true;
+    done();
+  });
+  it('should verify admin', (done) => {
+    chai.request(server)
+    .post('/api/v1/auth/create-user')
+    .send(authAdmin.next)
+    .end((err, res) => {
+      expect(res.status).to.equal(403);
+      done();
+    });
+  });
+
   it('should check all fields are available', (done) => {
     chai.request(server)
     .post('/api/v1/auth/create-user')

@@ -151,7 +151,7 @@ const logIn = (req, res, next) => {
   if(!req.body.email) {
     return res.status(409).json({
       success: 'false',
-      message: 'email name is required'
+      message: 'email is required'
     });
   } else if(!req.body.password) {
     return res.status(409).json({
@@ -178,6 +178,7 @@ const logIn = (req, res, next) => {
         const token = jwt.sign({
           email: reslt.rows[0].email,
           id: reslt.rows[0].id,
+          admin: reslt.rows[0].admin,
         }, process.env.secret_token, {
           expiresIn: '1h'
         });

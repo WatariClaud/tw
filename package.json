@@ -4,7 +4,8 @@
   "description": "teamwork employee bonding",
   "main": "index.js",
   "engines": {
-    "node": "10.x"
+    "node": "10.x",
+    "npm": "6.x"
   },
   "scripts": {
     "start": "nodemon es6/index.js",
@@ -30,7 +31,8 @@
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "pg": "^7.12.1",
-    "read-chunk": "^3.2.0"
+    "read-chunk": "^3.2.0",
+    "sinon": "^7.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

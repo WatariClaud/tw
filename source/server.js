@@ -3,6 +3,13 @@ import router from '../routes/routes';
 import bodyParser from 'body-parser';
 
 const app = express();
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Authorization, Content-Type, Accept');
+  next();
+});
+
 app.use(express.json());
 
 app.use(bodyParser.json())
