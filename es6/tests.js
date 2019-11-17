@@ -1,3 +1,5 @@
 require('babel-register');
-require('../specs/auth.test.js');
-require('../specs/server.test.js');
+require('../specs/userSpec.js');
+require('../specs/loginSpec.js');
+require('../specs/gifSpec.js');
+require('../specs/articleSpec.js');

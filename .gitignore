@@ -5,3 +5,5 @@ node_modules
 db.js
 
 .coveralls.yml
+
+specs/gifSpec.js
