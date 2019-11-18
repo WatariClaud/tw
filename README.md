@@ -1,6 +1,4 @@
 # tw-new
-Built from https://github.com/claudwatari95/tw
-=======
 [![Build Status](https://travis-ci.com/ClaudWatari95/tw.svg?token=DaepE415kiKy52GBGf6W&branch=develop)](https://travis-ci.com/ClaudWatari95/tw) [![Coverage Status](https://coveralls.io/repos/github/ClaudWatari95/tw/badge.svg?branch=develop)](https://coveralls.io/github/ClaudWatari95/tw?branch=develop)
 
 # TW
