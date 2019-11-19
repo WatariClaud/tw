@@ -36,6 +36,14 @@ const checkUser = (req, res, next) => {
   next();
 }
 
+const loggedUserName = (req, res, next) => {
+  pool.query('SELECT name FROM users WHERE email = ($1)', [loggedUser], (errored, ok) => {
+    if(errored) throw errored;
+    loggedUser = ok.rows[0].name;
+    next();
+  });
+}
+
 const addGifComment = (req, res) => {
   const OgifId = req.params.gifId;
   const comment = req.body;

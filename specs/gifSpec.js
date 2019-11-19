@@ -9,18 +9,19 @@ chai.use(chaiHttp);
 
 const gifModel = {
   gif1: {
-		title: '',
-		image: ''
+    title: '',
+    image: ''
   },
   gif2: {
-		title: 'title',
-		image: 'C:/Users/Guest/Documents/teamwork/server/screenshots/curl-signup.png'
+    title: 'title',
+    image: 'https://www.socialandtech.net/wp-content/uploads/2019/05/Screenshot-2019-05-19-at-14.52.05.png'
   },
   gif3: {
-		title: 'title',
-		image: 'C:/Users/Guest/Documents/teamwork/server/screenshots/headbanging.gif'
+    title: 'title',
+    image: 'C:/Users/Guest/Documents/teamwork/server/screenshots/headbanging.gif'
   },
 }
+
 describe('add gif', () => {
   it('should check image and title are available', (done) => {
     chai.request(server)

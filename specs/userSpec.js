@@ -37,7 +37,7 @@ describe('create user', () => {
     .end((err, res) => {
       if(err) return done(err);
       // expect(res.status).to.equal(409);
-      excpect(res).to.be.a('object');
+      expect(res).to.be.a('object');
       done();
     });
   });
@@ -50,7 +50,7 @@ describe('create user', () => {
     .end((err, res) => {
       if(err) return done(err);
       // expect(res.status).to.equal(500);
-      excpect(res).to.be.a('object');
+      expect(res).to.be.a('object');
       done();
     });
   });
