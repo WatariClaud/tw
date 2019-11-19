@@ -1,1 +1,1 @@
-web: npm start
+web: node es6/index.js
