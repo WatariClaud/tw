@@ -14,9 +14,9 @@ dotenv.config();
 
 const checkTable = (req, res, next) => {
   const query = `CREATE TABLE users (id SERIAL PRIMARY KEY,
-    firstName VARCHAR(30), lastName VARCHAR(30), email VARCHAR(50),
+    firstName VARCHAR(30), lastName VARCHAR(30), email VARCHAR(50) UNIQUE,
     password VARCHAR(255), gender VARCHAR(11), jobRole VARCHAR(50),
-    department VARCHAR(50), address VARCHAR(30)`;
+    department VARCHAR(50), address VARCHAR(30), admin VARCHAR(11))`;
 
   pool.query(query, (err, res) => {
     if(err) throw err;
@@ -40,13 +40,13 @@ const createUser = (req, res, next) => {
 	  if(e) throw e;
 	  else {
 	  	if(r.rows.length > 0) {
-	  		return res.status(409).json({
+	  		return res.status(500).json({
 	  		  'message': 'unable to sign up',
 	  		});
 	  	} else {
           bcrypt.hash(req.body.password, 10, (err, hash) => {
           if(err) {
-            return res.status(500).json({
+            return res.status(503).json({
               error: err
             });
           } else {
@@ -95,7 +95,7 @@ const createUser = (req, res, next) => {
           const token = jwt.sign({
             email: email,
             admin: false,
-          }, config.secret, {
+          }, process.env.secret_token, {
           	expiresIn: '1h',
           });
 
@@ -109,7 +109,7 @@ const createUser = (req, res, next) => {
                          jobRole, 
                          department, 
                          address,
-                         isAdmin) 
+                         admin) 
                          VALUES 
                          ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
                          RETURNING *`;
@@ -132,13 +132,11 @@ const createUser = (req, res, next) => {
           	    error: error
               });
             }
-            const success = res.status(201).json({
-              // 'message': `User added with ID: ${result.insertId}`,
+            return res.status(201).json({
               'status': 'success',
               'data': {
                 'message': 'user account successfully created',
                 'token': token,
-                // 'userId': result.rows[0].Id,
               }
              });
           });
@@ -149,49 +147,55 @@ const createUser = (req, res, next) => {
 	});
 };
 
-const logIn = (req, res) => {
+const logIn = (req, res, next) => {
   if(!req.body.email) {
-    return res.status(400).json({
+    return res.status(409).json({
       success: 'false',
-      message: 'email name is required'
+      message: 'email is required'
     });
-  } else if(!req.body.email) {
-    return res.status(400).json({
+  } else if(!req.body.password) {
+    return res.status(409).json({
       success: 'false',
       message: 'password is required'
     });
   } 
   const userEmail = req.body.email;
-  const validUser = pool.query('SELECT * FROM users WHERE email = ?', [userEmail]);
-  if(!validUser) {
-    return res.status(401).json({
-    	'message': 'auth failed'
-    })  ;
-  } else {
-    bcrypt.compare(req.body.password, validUser.password, (err, reult) => {
+  const userPass = req.body.password;
+  const validUser = pool.query('SELECT * FROM users WHERE email = $1', [userEmail], (error, reslt) => {
+    if(error) throw error;
+    if(reslt.rows.length < 1) {
+      return res.status(401).json({
+      'message': 'auth failed! invalid credentials'
+    });
+    } else {
+    bcrypt.compare(userPass, reslt.rows[0].password, (err, result) => {
       if(err) {
-      	return res.status(401).json({
-      		'message': 'auth failed'
-      	});
-      } else if(result) {
+        return res.status(401).json({
+          'message': 'auth failed! validation error'
+        });
+      } 
+      // else if(result) 
         const token = jwt.sign({
-        	email: validUser.email,
-        	id: validUser.id,
-        }, config.secret, {
+          email: reslt.rows[0].email,
+          id: reslt.rows[0].id,
+          admin: reslt.rows[0].admin,
+        }, process.env.secret_token, {
           expiresIn: '1h'
         });
         return res.status(200).json({
-        	'status': 'success',
-        	'data': {
-        	  'token': token,
-        	  'userId': validUser.id,
-        	}
+          'status': 'success',
+          'data': {
+            'token': token,
+            'userId': reslt.rows[0].id,
+          }
         })
-      }
+        next();
+      // }
     });
   }
+  });
 };
 
 export default {
-	createUser, logIn
+	checkTable, createUser, logIn
 };

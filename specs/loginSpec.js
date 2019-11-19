@@ -6,6 +6,10 @@ import server from '../source/server';
 
 import userModel from '../models/user';
 
+import bcrypt from 'bcrypt';
+
+import server from '../source/server';
+
 const expect = chai.expect;
 chai.use(chaiHttp);
 
@@ -14,6 +18,10 @@ describe('login', () => {
     chai.request(server)
     .post('/api/v1/auth/signin')
     .send(userModel.user5)
+    .end((err, res) => {
+      // expect(res.status).to.equal(409);
+      expect(res).to.be.a('object');
+    .send(userModel.user1)
     .end((err, res) => {
       // expect(res.status).to.equal(409);
       expect(res).to.be.a('object');
@@ -27,6 +35,9 @@ describe('login', () => {
     .end((err, res) => {
       // expect(res.status).to.equal(401);
       expect(res).to.be.a('object');
+    .send(userModel.user2)
+    .end((err, res) => {
+      expect(res.status).to.equal(401);
       done();
     });
   });
@@ -37,6 +48,9 @@ describe('login', () => {
     .end((err, res) => {
       // expect(res.status).to.equal(401);
       expect(res).to.be.a('object');
+    .send(userModel.user3)
+    .end((err, res) => {
+      expect(res.status).to.equal(401);
       done();
     });
   });
