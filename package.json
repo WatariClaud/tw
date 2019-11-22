@@ -2,7 +2,7 @@
   "name": "teamwork_bonding",
   "version": "1.0.0",
   "description": "teamwork employee bonding",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
     "node": "10.x"
   },
