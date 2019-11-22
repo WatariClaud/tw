@@ -1,0 +1,57 @@
+.App {
+  margin: 0;
+}
+header {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 2em 2em;
+  background: rgb(181, 65, 34);
+  cursor: default;
+}
+.nav-link {
+  background: transparent;
+  border: rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  cursor: pointer;
+  visibility: hidden;
+}
+.login-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 24px 9em;
+  background: transparent;
+  border: 1px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  padding: 0.5em 1em;
+  font-size: 1rem;
+}
+.container {
+  position: relative;
+  padding-top: 2em;
+  margin-top: 100px;
+}
+.home-img {
+  margin-left: -30px;
+  width: 40vw;;
+  min-width: 270px;
+  max-width: 850px;
+  height: 50vh;
+  min-height: 165px;
+  max-height: 650px;
+}
+.intro-p {
+  width: 50%;
+  margin-left: 45vw;
+  margin-top: -200px;
+  line-height: 140%;
+  font-size: 1em;
+  color: #666;
+}
+.spanned-text {
+	color: rgb(181, 65, 34);
+}
