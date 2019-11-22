@@ -1,0 +1,7 @@
+*:focus {
+  outline: none;
+}
+.App {
+  padding: 1em;
+  margin: 0;
+}
