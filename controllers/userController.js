@@ -26,24 +26,24 @@ const checkTable = (req, res, next) => {
 
 const createUser = (req, res, next) => {
   const { 
-  	      firstName, 
-  	      lastName, 
-  	      email, 
-  	      password, 
-  	      gender, 
-  	      jobRole, 
-  	      department, 
-  	      address 
-  	    } = req.body;
+          firstName, 
+          lastName, 
+          email, 
+          password, 
+          gender, 
+          jobRole, 
+          department, 
+          address 
+        } = req.body;
 
-	const signUp = pool.query('SELECT * FROM users WHERE email = $1', [email], (e, r) => {
-	  if(e) throw e;
-	  else {
-	  	if(r.rows.length > 0) {
-	  		return res.status(500).json({
-	  		  'message': 'unable to sign up',
-	  		});
-	  	} else {
+  const signUp = pool.query('SELECT * FROM users WHERE email = $1', [email], (e, r) => {
+    if(e) throw e;
+    else {
+      if(r.rows.length > 0) {
+        return res.status(500).json({
+          'message': 'unable to sign up',
+        });
+      } else {
           bcrypt.hash(req.body.password, 10, (err, hash) => {
           if(err) {
             return res.status(503).json({
@@ -96,7 +96,7 @@ const createUser = (req, res, next) => {
             email: email,
             admin: false,
           }, process.env.secret_token, {
-          	expiresIn: '1h',
+            expiresIn: '1h',
           });
 
           const query = `INSERT INTO 
@@ -129,7 +129,7 @@ const createUser = (req, res, next) => {
           const addUser = pool.query(query, values, (error, result) => {
             if(error) {
               return res.status(500).json({
-          	    error: error
+                error: error
               });
             }
             return res.status(201).json({
@@ -142,9 +142,9 @@ const createUser = (req, res, next) => {
           });
         }
       });
-	  	}
-	  }
-	});
+      }
+    }
+  });
 };
 
 const logIn = (req, res, next) => {
@@ -161,20 +161,23 @@ const logIn = (req, res, next) => {
   } 
   const userEmail = req.body.email;
   const userPass = req.body.password;
-  const validUser = pool.query('SELECT * FROM users WHERE email = $1', [userEmail], (error, reslt) => {
+  pool.query('SELECT * FROM users WHERE email = ($1)', [userEmail], (error, reslt) => {
     if(error) throw error;
     if(reslt.rows.length < 1) {
       return res.status(401).json({
-      'message': 'auth failed! invalid credentials'
-    });
-    } else {
+       'message': 'auth failed! invalid email'
+      });
+    }
     bcrypt.compare(userPass, reslt.rows[0].password, (err, result) => {
+      console.log(err);
+      console.log(result);
       if(err) {
         return res.status(401).json({
-          'message': 'auth failed! validation error'
+          'message': 'auth failed! validation error',
+          'error': err,
         });
-      } 
-      // else if(result) 
+      }
+      if(result) {
         const token = jwt.sign({
           email: reslt.rows[0].email,
           id: reslt.rows[0].id,
@@ -189,13 +192,16 @@ const logIn = (req, res, next) => {
             'userId': reslt.rows[0].id,
           }
         })
-        next();
-      // }
+        // next();
+      } else {
+        res.status(401).json({
+          'error': 'auth failed! invalid password',
+        })
+      }
     });
-  }
   });
 };
 
 export default {
-	checkTable, createUser, logIn
+  checkTable, createUser, logIn
 };
