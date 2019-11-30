@@ -1,4 +1,3 @@
-# tw
 find travis and coveralls badhes on new repo <a href = 'https://github.com/claudwatari/tw-new'>here</a>
 
 # TW
