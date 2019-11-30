@@ -4,6 +4,8 @@
 # TW
 Teamwork is an internal social network for employees of an organization. The goal of this application is to facilitate more interaction between colleagues and promote team bonding.
 
+### Check new repo at <a href = 'https://github.com/claudwatari/tw-new>new claud account</a>
+
 ## About teamwork app
 This app is written using <a href = 'https://nodejs.org'>nodejs</a>/express and is expected to be written in <a href = 'https://reactjs.org
 '>Reactjs</a> for front end component rendering. The database used is <a href = 'https://www.postgresql.org'>Postgresql</a>.
