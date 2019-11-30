@@ -1,5 +1,5 @@
 # tw
-[![Build Status](https://travis-ci.com/ClaudWatari95/tw.svg?token=DaepE415kiKy52GBGf6W&branch=develop)](https://travis-ci.com/ClaudWatari95/tw) [![Coverage Status](https://coveralls.io/repos/github/ClaudWatari95/tw/badge.svg?branch=develop)](https://coveralls.io/github/ClaudWatari95/tw?branch=develop)
+find travis and coveralls badhes on new repo <a href = 'https://github.com/claudwatari/tw-new'>here</a>
 
 # TW
 Teamwork is an internal social network for employees of an organization. The goal of this application is to facilitate more interaction between colleagues and promote team bonding.
