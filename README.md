@@ -1,4 +1,4 @@
-find travis and coveralls badhes on new repo <a href = 'https://github.com/claudwatari/tw-new'>here</a>
+find travis and coveralls badges on new repo <a href = 'https://github.com/claudwatari/tw-new'>here</a>
 
 # TW
 Teamwork is an internal social network for employees of an organization. The goal of this application is to facilitate more interaction between colleagues and promote team bonding.
